@@ -1,2 +1,15 @@
-data
-venv
+# Ignore Python bytecode files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+# Ignore virtual environment directories
+venv/
+# Ignore data files
+data/
+
+# Ignore environment files
+.env
+
