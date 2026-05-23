@@ -15,12 +15,24 @@ Intelligent Flood Disaster Prediction & Decision System
 
 Keep it simple: develop in `feature/*` → PR to `dev` → test in staging → merge to `main` for release.
 
-## How to Run
+## Team Roles
+- ML pipeline
+- Agent + CSP
+- Knowledge base + integration
+- Frontend + documentation
 
-- First set up virtual env at root by `python -m venv venv`.
-- Activate source by `source venv/bin/activate`.
-- Install deps by `pip install -r requirements.txt`.
-- Run the backend server by `uvicorn app.main:app --reload`.
-- Access API docs at `http://localhost:8000/docs`.
-
-Frontend is in `frontend/` — run with `npm install` and `npm start` to access at `http://localhost:3000`.
+## Problem Statement ( ML Training )
+- We are predicting `FloodProbability` in our dataset.
+- Inputs are the following columns:
+```
+Index(['id', 'MonsoonIntensity', 'TopographyDrainage', 'RiverManagement',
+       'Deforestation', 'Urbanization', 'ClimateChange', 'DamsQuality',
+       'Siltation', 'AgriculturalPractices', 'Encroachments',
+       'IneffectiveDisasterPreparedness', 'DrainageSystems',
+       'CoastalVulnerability', 'Landslides', 'Watersheds',
+       'DeterioratingInfrastructure', 'PopulationScore', 'WetlandLoss',
+       'InadequatePlanning', 'PoliticalFactors', 'FloodProbability'],
+      dtype='object')
+```
+- Decision Support : To be determined
+- What the system outputs beyond prediction ( recommendation actions ) : TBD
