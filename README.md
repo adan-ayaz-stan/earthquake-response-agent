@@ -1,38 +1,46 @@
-# Flood Disaster Agent
+# Earthquake Disaster Prediction Agent
 
-Intelligent Flood Disaster Prediction & Decision System
+This repository has shifted from flood-risk experimentation to an **earthquake-focused disaster prediction and decision-support workflow**.
 
-**Dataset Domain:** Flood Risk / Disaster (rainfall, river levels, humidity, temperature → flood risk level)
+## Current Project Focus
 
-**Objective:** Build a full intelligent pipeline: raw data → ML prediction → AI agent → CSP → Knowledge Base → Frontend
+The current notebooks build an end-to-end pipeline around historical earthquake records:
 
-## Branching Strategy
+- Explore earthquake event distributions and data quality
+- Clean and preprocess missing geographic/alert metadata
+- Engineer risk-oriented features (for example `energy_proxy`, time features)
+- Create a target class: `Disaster_Urgency`
+- Prepare train/test splits and scaled features for downstream modeling
 
-- **main**: production — always deployable. Protect with branch rules; only merge tested release PRs.
-- **dev**: staging — integration branch for QA and preview environments.
-- **feature/***: short-lived feature branches off `dev` (naming: `feature/<short-desc>`). Open PRs into `dev` when ready.
-- **hotfix/***: branch off `main` for urgent fixes; merge back into both `main` and `dev`.
+## Notebook Workflow
 
-Keep it simple: develop in `feature/*` → PR to `dev` → test in staging → merge to `main` for release.
+- `/tmp/workspace/adan-ayaz-stan/flood-prediction-agent/notebooks/01_data_exploration.ipynb`
+  - Loads `earthquake_data.csv`
+  - Performs overview, missing-value checks, time analysis, spatial analysis, and correlation analysis
 
-## Team Roles
-- ML pipeline
-- Agent + CSP
-- Knowledge base + integration
-- Frontend + documentation
+- `/tmp/workspace/adan-ayaz-stan/flood-prediction-agent/notebooks/02_preprocessing.ipynb`
+  - Cleans nulls in `alert`, `continent`, `country`, and `location`
+  - Builds engineered features from `magnitude` and `date_time`
+  - Derives `Disaster_Urgency` labels from hazard indicators (`magnitude`, `mmi`, `tsunami`)
+  - Encodes categorical features and prepares scaled ML-ready datasets
 
-## Problem Statement ( ML Training )
-- We are predicting `FloodProbability` in our dataset.
-- Inputs are the following columns:
-```
-Index(['id', 'MonsoonIntensity', 'TopographyDrainage', 'RiverManagement',
-       'Deforestation', 'Urbanization', 'ClimateChange', 'DamsQuality',
-       'Siltation', 'AgriculturalPractices', 'Encroachments',
-       'IneffectiveDisasterPreparedness', 'DrainageSystems',
-       'CoastalVulnerability', 'Landslides', 'Watersheds',
-       'DeterioratingInfrastructure', 'PopulationScore', 'WetlandLoss',
-       'InadequatePlanning', 'PoliticalFactors', 'FloodProbability'],
-      dtype='object')
-```
-- Decision Support : To be determined
-- What the system outputs beyond prediction ( recommendation actions ) : TBD
+## Repository Structure
+
+- `/tmp/workspace/adan-ayaz-stan/flood-prediction-agent/notebooks` – data exploration and preprocessing notebooks
+- `/tmp/workspace/adan-ayaz-stan/flood-prediction-agent/src` – project entrypoint code
+- `/tmp/workspace/adan-ayaz-stan/flood-prediction-agent/requirements.txt` – Python dependencies
+
+## Getting Started
+
+1. Create and activate a Python virtual environment.
+2. Install dependencies:
+   - `pip install -r requirements.txt`
+3. Open notebooks:
+   - `jupyter notebook`
+4. Run the application entrypoint (placeholder app):
+   - `python /tmp/workspace/adan-ayaz-stan/flood-prediction-agent/src/main.py`
+
+## Notes
+
+- Existing notebooks and preprocessing logic are currently centered on **earthquake** analytics.
+- README terminology has been updated to match this shifted scope.
