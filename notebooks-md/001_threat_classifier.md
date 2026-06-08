@@ -672,6 +672,46 @@ elif hasattr(model_obj, 'coef_'):
     
 
 
+
+```python
+from sklearn.model_selection import validation_curve
+
+# 1. Test different strengths of regularization (C)
+# Small C = Strong regularization (prevents overfitting)
+# Large C = Weak regularization (allows overfitting)
+param_range = np.logspace(-4, 2, 10) 
+
+train_scores, test_scores = validation_curve(
+    LogisticRegression(penalty='l2', max_iter=1000, random_state=42),
+    X_train_res, y_train_res, 
+    param_name="C", 
+    param_range=param_range,
+    cv=5, scoring="accuracy", n_jobs=-1
+)
+
+# Calculate mean accuracy for training and validation sets
+train_mean = np.mean(train_scores, axis=1)
+test_mean = np.mean(test_scores, axis=1)
+
+# 2. Plot the Bias-Variance Tradeoff Curve
+plt.figure(figsize=(8, 5))
+plt.semilogx(param_range, train_mean, label="Training score (Low Bias)", color="darkorange", lw=2)
+plt.semilogx(param_range, test_mean, label="Cross-validation score (Low Variance)", color="navy", lw=2)
+plt.title("Validation Curve: Threat Classifier Bias-Variance Tradeoff")
+plt.xlabel("Parameter C (Inverse of Regularization Strength)")
+plt.ylabel("Accuracy")
+plt.legend(loc="best")
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.show()
+```
+
+
+    
+![png](001_threat_classifier_files/001_threat_classifier_23_0.png)
+    
+
+
 ## Save Best Model + Scaler + Encoder
 
 
